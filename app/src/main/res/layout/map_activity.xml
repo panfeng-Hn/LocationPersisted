@@ -4,6 +4,10 @@
 
 
     <com.baidu.mapapi.map.TextureMapView
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:id="@+id/baidu_map_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

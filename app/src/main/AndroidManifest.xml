@@ -59,6 +59,21 @@
 
         </activity>
 
+        <activity android:name=".activity.IntoCallListActivity">
+
+        </activity>
+
+        <activity android:name=".activity.LocationWatchActivity">
+
+        </activity>
+
+        <activity android:name=".activity.MapActivity">
+
+        </activity>
+        <service android:name=".service.GetLocationService">
+
+        </service>
+
 
     </application>
 

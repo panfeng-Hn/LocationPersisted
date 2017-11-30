@@ -6,6 +6,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.util.Log;
 
+import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BaiduMap;
+
 import java.io.File;
 
 /**
@@ -18,12 +21,22 @@ public class LpAppliection extends Application {
 
     public Boolean is_init_db=false;
 
+    private BaiduMap map;
 
 
+    public BaiduMap getMap() {
+        return map;
+    }
+
+    public void setMap(BaiduMap map) {
+        this.map = map;
+    }
 
     @Override
     public void onCreate() {
+
         super.onCreate();
+        SDKInitializer.initialize(getApplicationContext());
         init();
     }
 

@@ -2,9 +2,13 @@ package com.panfeng.locationpersisted;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +16,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.panfeng.locationpersisted.activity.MapActivity;
+import com.panfeng.locationpersisted.service.GetLocationService;
 
 import java.io.File;
 
@@ -35,6 +42,18 @@ public class MainActivity extends AppCompatActivity {
     private Button watch_map;
 
 
+    ServiceConnection conn=new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +63,15 @@ public class MainActivity extends AppCompatActivity {
         set_location_button=findViewById(R.id.set_location_button);
         location_cord_watch=findViewById(R.id.location_cord_watch);
         location_refush_rate=findViewById(R.id.location_refush_rate);
+        watch_map=findViewById(R.id.watch_map);
         //检查权限
         checkPermission();
         setListener();
+
+
+        Intent intent=new Intent(this, GetLocationService.class);
+        startService(intent);
+        bindService(intent,conn,BIND_AUTO_CREATE);
 
     }
 
@@ -141,6 +166,10 @@ public class MainActivity extends AppCompatActivity {
         watch_map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Intent intent=new Intent(MainActivity.this, MapActivity.class);
+
+                startActivity(intent);
 
             }
         });
