@@ -17,6 +17,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.panfeng.locationpersisted.activity.AwayCallListActivity;
+import com.panfeng.locationpersisted.activity.IntoCallListActivity;
+import com.panfeng.locationpersisted.activity.LocationWatchActivity;
 import com.panfeng.locationpersisted.activity.MapActivity;
 import com.panfeng.locationpersisted.service.GetLocationService;
 
@@ -68,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         checkPermission();
         setListener();
 
-
+        //启动监听服务
         Intent intent=new Intent(this, GetLocationService.class);
         startService(intent);
         bindService(intent,conn,BIND_AUTO_CREATE);
@@ -103,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 }
             }
+            //权限获取成功后重新初始化
             if(is_permission){
                 LpAppliection appliection= (LpAppliection) getApplication();
                 appliection.init();
@@ -111,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this,"权限获取失败，程序退出！",0);
                 try {
                     Thread.sleep(1500);
+                    System.exit(0);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -122,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
         awaw_call_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this, AwayCallListActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -131,6 +138,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
+                Intent intent=new Intent(MainActivity.this, IntoCallListActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -158,7 +168,8 @@ public class MainActivity extends AppCompatActivity {
         location_cord_watch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent=new Intent(MainActivity.this, LocationWatchActivity.class);
+                startActivity(intent);
             }
         });
 
